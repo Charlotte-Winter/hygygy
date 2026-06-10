@@ -1,1 +1,39 @@
-äää
+return {
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  config = function()
+    local configs = require("nvim-treesitter.configs")
+
+    configs.setup({
+      -- Hier definierst du, welche Parser automatisch installiert werden sollen
+      ensure_installed = { 
+        "html", 
+        "javascript", 
+        "css", 
+        "typescript", -- Oft nützlich, wenn man JS schreibt
+        "lua",        -- Für deine Neovim-Konfiguration selbst
+        "vim", 
+        "vimdoc" 
+      },
+      
+      -- Installiert Parser asynchron
+      sync_install = false,
+
+      -- Automatische Klon-Updates, falls ein Parser crasht
+      auto_install = true,
+
+      -- Das eigentliche Syntax-Highlighting aktivieren
+      highlight = {
+        enable = true,
+        -- Setze das auf true, wenn du Standard-Vim-Regex-Highlighting parallel nutzen willst (meistens nicht empfohlen)
+        additional_vim_regex_highlighting = false,
+      },
+      
+      -- Aktiviert die auf Treesitter basierende automatische Einrückung (Indent)
+      indent = {
+        enable = true,
+      },
+    })
+  end,
+}
+
