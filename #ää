@@ -1,27 +1,30 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  -- Wir nutzen den stabilen v0.9-Branch, damit das 'configs'-Modul existiert
+  branch = "v0.9.x", 
   build = ":TSUpdate",
-  -- Wir sagen Lazy genau, wo die setup-Funktion liegt
-  main = "nvim-treesitter.configs", 
-  opts = {
-    -- Hier kommen deine Einstellungen rein (ohne das require-Drumherum)
-    ensure_installed = { 
-      "html", 
-      "javascript", 
-      "css", 
-      "typescript", 
-      "lua", 
-      "vim", 
-      "vimdoc" 
-    },
-    sync_install = false,
-    auto_install = true,
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = false,
-    },
-    indent = {
-      enable = true,
-    },
-  },
+  config = function()
+    local configs = require("nvim-treesitter.configs")
+
+    configs.setup({
+      ensure_installed = { 
+        "html", 
+        "javascript", 
+        "css", 
+        "typescript", 
+        "lua", 
+        "vim", 
+        "vimdoc" 
+      },
+      sync_install = false,
+      auto_install = true,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+      indent = {
+        enable = true,
+      },
+    })
+  end,
 }
